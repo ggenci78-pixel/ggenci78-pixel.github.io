@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="曾慧婷的个人学术主页。">
+    <title>曾慧婷 | 个人主页</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --ink: #162534;
+        --muted: #536472;
+        --line: #d8e0e5;
+        --paper: #fbfcfd;
+        --accent: #a3221b;
+        --blue: #1e5d7b;
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        margin: 0;
+        background: var(--paper);
+        color: var(--ink);
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", Arial, sans-serif;
+        line-height: 1.6;
+      }
+
+      main {
+        width: min(920px, calc(100% - 40px));
+        margin: 0 auto;
+        padding: 72px 0 48px;
+      }
+
+      header {
+        display: grid;
+        grid-template-columns: 116px 1fr;
+        gap: 30px;
+        align-items: center;
+        padding-bottom: 42px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .monogram {
+        display: grid;
+        width: 116px;
+        height: 116px;
+        place-items: center;
+        border: 1px solid var(--blue);
+        border-radius: 50%;
+        background: #f1f6f8;
+        color: var(--blue);
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 44px;
+      }
+
+      h1, h2 { margin: 0; line-height: 1.25; }
+
+      h1 {
+        font-size: 42px;
+        font-weight: 650;
+      }
+
+      .role {
+        margin: 10px 0 0;
+        color: var(--muted);
+        font-size: 18px;
+      }
+
+      .accent { color: var(--accent); }
+
+      section {
+        display: grid;
+        grid-template-columns: 210px 1fr;
+        gap: 32px;
+        padding: 32px 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      h2 {
+        color: var(--blue);
+        font-size: 15px;
+        letter-spacing: .08em;
+        text-transform: uppercase;
+      }
+
+      p { margin: 0; }
+
+      .contact a {
+        color: var(--ink);
+        text-decoration-color: #a7bbc6;
+        text-underline-offset: 3px;
+      }
+
+      footer {
+        padding-top: 28px;
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      @media (max-width: 600px) {
+        main { width: min(100% - 32px, 920px); padding-top: 42px; }
+        header { grid-template-columns: 82px 1fr; gap: 20px; }
+        .monogram { width: 82px; height: 82px; font-size: 31px; }
+        h1 { font-size: 32px; }
+        .role { font-size: 16px; }
+        section { grid-template-columns: 1fr; gap: 10px; padding: 25px 0; }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header>
+        <div class="monogram" aria-hidden="true">慧婷</div>
+        <div>
+          <h1>曾慧婷</h1>
+          <p class="role">上海理工大学 <span class="accent">|</span> 学生</p>
+        </div>
+      </header>
+
+      <section>
+        <h2>关于我</h2>
+        <p>曾慧婷，上海理工大学学生。本页面用于提供公开的个人身份与联系信息。</p>
+      </section>
+
+      <section class="contact">
+        <h2>联系</h2>
+        <p>电子邮件：<a href="mailto:zenghuiting@sensetime.com">zenghuiting@sensetime.com</a></p>
+      </section>
+
+      <footer>最后更新：2026 年 9 月</footer>
+    </main>
+  </body>
+</html>
