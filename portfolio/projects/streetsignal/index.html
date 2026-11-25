@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101310">
+  <title>StreetSignal | 区域穿着趋势观察台</title>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="dark.css">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="#overview" aria-label="StreetSignal 首页"><i data-lucide="scan"></i>STREETSIGNAL<span class="brand-edition">FIELD INTELLIGENCE / 01</span></a>
+  <div class="demo-badge"><span class="status-dot"></span>概念验证 · 模拟统计</div>
+</header>
+<div class="workspace">
+  <nav class="workspace-nav" aria-label="工作区">
+    
+    <a href="#overview" data-view="overview"><i data-lucide="chart-no-axes-combined"></i>趋势概览</a>
+    <a href="#method" data-view="method"><i data-lucide="database"></i>数据与口径</a>
+    <span class="nav-end mono">OBSERVE / COMPARE / DECIDE</span>
+  </nav>
+  <section id="overview" class="view" hidden>
+    <div class="page-heading"><div><div class="eyebrow">REGIONAL WEAR SIGNALS</div><h1>从街头穿着，到商品判断<span class="title-period">.</span></h1></div><button id="download-report" class="primary" title="导出观察简报" aria-label="导出观察简报"><i data-lucide="download"></i>导出观察简报</button></div>
+    <form id="filters" class="filters">
+      <label><i data-lucide="map-pin"></i><span>观察城市</span><select id="city" name="city" aria-label="观察城市"><option value="shanghai">上海</option><option value="chengdu">成都</option><option value="guangzhou">广州</option></select></label>
+      <label><i data-lucide="thermometer"></i><span>温度区间</span><select id="temperature" name="temperature" aria-label="温度区间"><option value="all">全部温度</option><option value="cool">8–16°C</option><option value="mild">17–24°C</option><option value="warm">25–31°C</option></select></label>
+      <label><i data-lucide="calendar-days"></i><span>观察周期</span><select id="period" name="period" aria-label="观察周期"><option value="4">最近 4 周</option><option value="8">最近 8 周</option></select></label>
+      <span class="date-range mono" id="date-range"></span>
+      <button type="button" class="icon-button" id="reset-filters" title="重置筛选" aria-label="重置筛选"><i data-lucide="rotate-ccw"></i></button>
+    </form>
+    <div class="data-banner"><i data-lucide="flask-conical"></i><span>模拟数据集 S-01 · 城市、温度与穿着比例均为场景设定，不来自视频或真实人群调查。</span><a href="#method">查看口径<i data-lucide="arrow-up-right"></i></a></div>
+    <div class="kpi-band" id="kpis" aria-live="polite"></div>
+    <div class="analytics-grid">
+      <section class="trend-panel">
+        <div class="section-heading"><div><div class="eyebrow">01 / SIGNAL EXPLORER</div><h2>哪些穿着正在变化</h2></div><span class="small-badge">演示统计</span></div>
+        <div class="signal-tabs" id="signal-tabs" role="tablist" aria-label="服装元素"></div>
+        <div class="chart-heading"><div><span class="muted" id="chart-caption"></span><div class="chart-value"><strong id="signal-rate"></strong><span id="signal-delta"></span></div></div><div class="legend"><span><b class="legend-current"></b>当前周期</span><span><b class="legend-previous"></b>上一等长周期</span></div></div>
+        <div id="trend-chart" class="trend-chart" role="tabpanel"></div>
+        <div class="chart-foot"><span id="signal-denominator"></span><button id="open-data" class="text-button"><i data-lucide="table-2"></i>查看周度数据</button></div>
+      </section>
+      <section class="ranking-panel">
+        <div class="section-heading"><div><div class="eyebrow">02 / ELEMENT MIX</div><h2>穿着元素分布</h2></div><span class="muted">出现比例</span></div>
+        <div id="ranking"></div>
+        <p class="footnote">元素可同时出现，比例之和不等于 100%。每项仅统计对应单品清晰可见的有效样本。</p>
+      </section>
+    </div>
+    <div class="decision-grid">
+      <section class="regional-panel">
+        <div class="section-heading"><div><div class="eyebrow">03 / REGIONAL CONTEXT</div><h2 id="regional-title">同一元素，不同城市</h2></div><i data-lucide="map"></i></div>
+        <div id="regional-comparison"></div>
+        <p class="footnote">沿用当前温度与周期。城市为模拟分组，不能外推为城市居民整体偏好。</p>
+      </section>
+      <section class="decision-panel">
+        <div class="section-heading"><div><div class="eyebrow">04 / DECISION NOTES</div><h2>把信号变成待验证的行动</h2></div><i data-lucide="move-up-right"></i></div>
+        <div id="decision-notes" aria-live="polite"></div>
+      </section>
+    </div>
+
+  </section>
+  <section id="method" class="view" hidden>
+    <div class="page-heading"><div><div class="eyebrow">DATA CONTRACT / S-01</div><h1>让结论有边界，让数据有来处<span class="title-period">.</span></h1></div><button id="download-data" title="导出模拟数据 CSV" aria-label="导出模拟数据 CSV"><i data-lucide="download"></i>导出模拟数据 CSV</button></div>
+    <div class="data-banner"><i data-lucide="flask-conical"></i><span>这里记录的是演示口径与计划中的采集原则，不代表已经完成真实采集、匿名化认证或合规审查。</span></div>
+    <div class="method-grid">
+      <section><div class="eyebrow">01 / PROVENANCE</div><h2>三种内容，明确分开</h2><dl><dt>模拟统计</dt><dd>3 个城市 × 3 个温度区间 × 16 周。由固定规则生成聚合计数，刷新不随机变化；没有真实个人记录、实时天气或真实趋势结论。</dd><dt>实景素材</dt><dd>3 段 Pexels 预录片段，来源可在街景观察中访问。不据此推断地点，不用于区域统计。公开发布前仍需核查素材与人物使用条件。</dd><dt>单品标注</dt><dd>名称及初始框为人工标注，后续使用 OpenCV CSRT 离线跟踪。遮挡、镜头变化时仍可能漂移，不是服装识别模型结果。</dd></dl></section>
+      <section><div class="eyebrow">02 / DEFINITIONS</div><h2>比例究竟在说什么</h2><dl><dt>元素出现比例</dt><dd>含该元素的有效穿搭样本数 ÷ 对应单品清晰可见的样本数。例如阔腿裤使用下装有效样本，条纹衬衫使用上装有效样本。</dd><dt>周期变化</dt><dd>所选 4 周或 8 周的合并比例，与上一等长周期比较。差值单位是百分点（pp），不是相对增长率。</dd><dt>温度与时间</dt><dd>温度是模拟分组条件，不是真实气象记录。固定演示周期截至 2026-10-25；周度图按对应周次对齐，不代表同一天的观测。</dd></dl></section>
+      <section><div class="eyebrow">03 / QUALITY GATES</div><h2>真实试点前的质量要求</h2><ul class="method-list"><li><i data-lucide="check"></i>合法、适当授权的数据来源，先明确采集与商用边界。</li><li><i data-lucide="check"></i>不把连续视频帧当作独立人数，明确短时去重与复访误差。</li><li><i data-lucide="check"></i>排除无法判断的单品，按品类报告识别质量并支持人工复核。</li><li><i data-lucide="check"></i>披露地点、时段、天气及人群选择偏差，不外推全国。</li></ul></section>
+      <section><div class="eyebrow">04 / PRIVACY BY DESIGN</div><h2>少收集，不等于自动合规</h2><p>拟采用合法输入、端侧处理、端侧聚合后上传的架构。默认不上传人脸、原始画面、个人截图或可复用的身份特征；不做跨镜头身份追踪。</p><p>即使不保存视频，现场图像处理也不能自动排除个人信息与设备安装限制。真实试点需先完成适用地区的法律审查、权限确认与小样本披露风险评估。</p></section>
+    </div>
+    <section class="research-notes"><div class="section-heading"><div><div class="eyebrow">RESEARCH → PRODUCT</div><h2>从研究中提取方法，而不是借用结论</h2></div></div><div class="research-row"><strong>GeoStyle · ICCV 2019</strong><span>借鉴城市与时间维度的服装属性聚合；本演示未使用其原始数据或模型。</span></div><div class="research-row"><strong>Fashionpedia / DeepFashion2</strong><span>借鉴单品级定位与属性拆分；目前未接入模型，也不宣称其识别能力。</span></div><div class="research-row"><strong>商业验证边界</strong><span>穿着频率不是购买意愿。下一步用授权样本校验质量，再用真实选款任务验证价值。</span></div></section>
+  </section>
+  <footer><span class="mono">STREETSIGNAL / FIELD INTELLIGENCE</span><span>观察是证据的开始，不是预测的保证。</span><span class="mono">PROTOTYPE 0.3</span></footer>
+</div>
+<dialog id="data-dialog"><div class="dialog-heading"><div><span class="eyebrow">SIMULATED / WEEKLY DATA</span><h2 id="dialog-title">周度数据</h2></div><button id="close-data" class="icon-button" aria-label="关闭数据表" title="关闭"><i data-lucide="x"></i></button></div><p class="footnote">当前周期与上一等长周期，均为模拟聚合计数。</p><div class="table-scroll"><table><thead><tr><th>周期</th><th>周起始</th><th>出现样本</th><th>有效样本</th><th>比例</th></tr></thead><tbody id="weekly-table"></tbody></table></div></dialog>
+<div id="toast" role="status" hidden></div>
+<script src="../../assets/js/lucide.min.js"></script>
+<script src="demo-data.js"></script>
+<script src="dashboard.js"></script>
+
+
+
+</body>
+</html>
